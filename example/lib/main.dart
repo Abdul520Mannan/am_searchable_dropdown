@@ -54,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   List<User> _selectedUsers = [];
-  User? _selectedRadioUser;
 
   final List<User> _users = [
     User(name: 'Alice Johnson', email: 'alice@example.com'),
@@ -162,39 +161,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 32),
 
-            // 3. Radio Select
-            const Text('3. Radio Select Dropdown', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
-            CustomRadioSearchDropdownWidget<User>(
-              topContext: context,
-              itemsList: _users,
-              backgroundColor: Colors.white,
-              selectedItem: _selectedRadioUser,
-              onChange: (value) {
-                setState(() {
-                  _selectedRadioUser = value;
-                });
-              },
-              headerBuilder: (context, selectedItem, enabled) {
-                return Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      Text(selectedItem?.name ?? 'Select user'),
-                      const Spacer(),
-                      const Icon(Icons.arrow_drop_down),
-                    ],
-                  ),
-                );
-              },
-              listItemBuilder: (context, item, isSelected) {
-                return Text(item.name);
-              },
-            ),
             const SizedBox(height: 48),
 
             // Display Results
@@ -212,7 +178,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Divider(),
                   Text('Fruit: ${_selectedFruit ?? "None"}'),
                   Text('Multi Users: ${_selectedUsers.map((e) => e.name).join(", ")}'),
-                  Text('Radio User: ${_selectedRadioUser?.name ?? "None"}'),
                 ],
               ),
             ),

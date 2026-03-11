@@ -1,12 +1,11 @@
 # Searable Dropdown
 
-A highly customizable, searchable dropdown package for Flutter. It provides three distinct widgets to handle single selection, multi-selection with checkboxes, and radio-button selection.
+A highly customizable, searchable dropdown package for Flutter. It provides two distinct widgets to handle single selection and multi-selection with checkboxes.
 
 ## Features
 
 *   **Single Select Dropdown**: A standard searchable dropdown for picking one item.
 *   **Multi Select Dropdown**: Allows picking multiple items with a checkbox UI.
-*   **Radio Select Dropdown**: A single-select variant using radio buttons for list items.
 *   **Conditional Local Search**: 
     *   If `onSearch` is provided, it handles remote/server-side searching.
     *   If `onSearch` is `null`, it automatically performs local filtering using `item.toString()`.
@@ -55,17 +54,6 @@ CustomMultiSearchDropdownWidget<User>(
 )
 ```
 
-### Radio Select
-
-```dart
-CustomRadioSearchDropdownWidget<User>(
-  topContext: context,
-  itemsList: users,
-  selectedItem: selectedUser,
-  onChange: (value) => setState(() => selectedUser = value),
-  headerBuilder: (context, item, enabled) => Text(item?.name ?? 'Select User'),
-  listItemBuilder: (context, item, isSelected) => Text(item.name),
-)
 ```
 
 ## Additional information
