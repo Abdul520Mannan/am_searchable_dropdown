@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:am_searchable_dropdown/am_searchable_dropdown.dart';
 
 void main() {
   runApp(const MyApp());

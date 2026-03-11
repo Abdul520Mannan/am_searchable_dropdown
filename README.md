@@ -1,4 +1,4 @@
-# Searchable Dropdown
+# AM Searchable Dropdown
 
 A highly customizable, searchable dropdown package for Flutter. It provides two distinct widgets to handle single selection and multi-selection with checkboxes.
 
@@ -18,7 +18,8 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  searchable_dropdown: ^1.0.0
+dependencies:
+  am_searchable_dropdown: ^1.0.0
 ```
 
 Then run:
@@ -32,7 +33,7 @@ flutter pub get
 ### Single Select
 
 ```dart
-import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:am_searchable_dropdown/am_searchable_dropdown.dart';
 CustomSearchDropdownWidget<String>(
   itemsList: ['Apple', 'Banana', 'Cherry'],
   onChange: (value) => print(value),
