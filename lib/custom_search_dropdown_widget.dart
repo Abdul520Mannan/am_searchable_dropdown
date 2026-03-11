@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class CustomSearchDropdownWidget<T> extends StatefulWidget {
   const CustomSearchDropdownWidget({
     super.key,
-    required this.topContext,
     required this.onChange,
     required this.itemsList,
     required this.backgroundColor,
@@ -14,9 +13,10 @@ class CustomSearchDropdownWidget<T> extends StatefulWidget {
     this.selectedItem,
     this.isLoading = false,
     this.searchFieldDecoration,
+    this.itemToString,
   });
 
-  final BuildContext topContext;
+  final String Function(T item)? itemToString;
   final void Function(T value) onChange;
   final List<T> itemsList;
   final Color backgroundColor;
@@ -44,7 +44,7 @@ class _CustomSearchDropdownWidgetState<T> extends State<CustomSearchDropdownWidg
   @override
   void initState() {
     super.initState();
-    filteredList = widget.itemsList;
+    filteredList = List.from(widget.itemsList);
     searchController.addListener(_onSearchChanged);
   }
 
@@ -53,14 +53,16 @@ class _CustomSearchDropdownWidgetState<T> extends State<CustomSearchDropdownWidg
     super.didUpdateWidget(oldWidget);
     if (widget.itemsList != oldWidget.itemsList || widget.isLoading != oldWidget.isLoading) {
       if (widget.onSearch != null) {
-        filteredList = widget.itemsList;
+        filteredList = List.from(widget.itemsList);
       } else {
         _applyLocalFilter(searchController.text);
       }
-      
+
       if (overlay != null) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          overlay?.markNeedsBuild();
+          if (overlay?.mounted ?? false) {
+            overlay?.markNeedsBuild();
+          }
         });
       }
     }
@@ -82,19 +84,22 @@ class _CustomSearchDropdownWidgetState<T> extends State<CustomSearchDropdownWidg
     if (query.isEmpty) {
       if (mounted) {
         setState(() {
-          filteredList = widget.itemsList;
+          filteredList = List.from(widget.itemsList);
         });
       }
     } else {
       if (mounted) {
         setState(() {
           filteredList = widget.itemsList.where((item) {
-            return item.toString().toLowerCase().contains(query.toLowerCase());
+            final String filterString = widget.itemToString?.call(item) ?? item.toString();
+            return filterString.toLowerCase().contains(query.toLowerCase());
           }).toList();
         });
       }
     }
-    overlay?.markNeedsBuild();
+    if (overlay?.mounted ?? false) {
+      overlay?.markNeedsBuild();
+    }
   }
 
   void _toggleOverLay() {
@@ -104,7 +109,9 @@ class _CustomSearchDropdownWidgetState<T> extends State<CustomSearchDropdownWidg
       Overlay.of(context).insert(overlay!);
     } else {
       isToggle = false;
-      overlay?.remove();
+      if (overlay?.mounted ?? false) {
+        overlay?.remove();
+      }
       overlay = null;
       searchController.clear();
     }
@@ -114,7 +121,9 @@ class _CustomSearchDropdownWidgetState<T> extends State<CustomSearchDropdownWidg
   void _removeOverlay() {
     if (overlay != null) {
       isToggle = false;
-      overlay!.remove();
+      if (overlay?.mounted ?? false) {
+        overlay?.remove();
+      }
       overlay = null;
       if (mounted) setState(() {});
     }
@@ -204,7 +213,7 @@ class _CustomSearchDropdownWidgetState<T> extends State<CustomSearchDropdownWidg
             borderRadius: BorderRadius.circular(8),
             boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 8.0, offset: Offset(0, 2))],
           ),
-          width: width ?? MediaQuery.of(widget.topContext).size.width,
+          width: width ?? MediaQuery.of(context).size.width,
           child: Column(
             children: [
               const Padding(

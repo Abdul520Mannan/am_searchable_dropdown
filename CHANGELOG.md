@@ -1,3 +1,12 @@
+## 1.1.0
+
+*   Refactored `CustomSearchDropdownWidget` and `CustomMultiSearchDropdownWidget`:
+    *   Removed `topContext` parameter.
+    *   Added `itemToString` parameter for custom search filtering.
+    *   Ensured safe internal copy of `itemsList`.
+    *   Added safe overlay removal checks (`overlay.mounted`).
+*   Updated repository URL to `https://github.com/Abdul520Mannan/searchable_dropdown`.
+
 ## 1.0.0
 
 * Initial release.

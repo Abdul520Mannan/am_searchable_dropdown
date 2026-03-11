@@ -86,7 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text('1. Single Select Dropdown', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             CustomSearchDropdownWidget<String>(
-              topContext: context,
               itemsList: _fruits,
               backgroundColor: Colors.white,
               onChange: (value) {
@@ -124,7 +123,6 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text('2. Multi Select Dropdown', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             CustomMultiSearchDropdownWidget<User>(
-              topContext: context,
               itemsList: _users,
               backgroundColor: Colors.white,
               selectedItems: _selectedUsers,

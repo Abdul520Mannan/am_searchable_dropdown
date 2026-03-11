@@ -6,11 +6,10 @@ A highly customizable, searchable dropdown package for Flutter. It provides two 
 
 *   **Single Select Dropdown**: A standard searchable dropdown for picking one item.
 *   **Multi Select Dropdown**: Allows picking multiple items with a checkbox UI.
-*   **Conditional Local Search**: 
-    *   If `onSearch` is provided, it handles remote/server-side searching.
-    *   If `onSearch` is `null`, it automatically performs local filtering using `item.toString()`.
+*   **Customizable Filtering**: Provide a custom `itemToString` function or default to `item.toString()`.
 *   **Customizable UI**: Fully customizable headers and list items via builders.
 *   **Debounced Search**: Built-in 500ms debounce for search input.
+*   **Safe Overlay Handling**: Automatically checks if the overlay is mounted before removal.
 
 ## Getting started
 
@@ -33,7 +32,6 @@ flutter pub get
 
 ```dart
 CustomSearchDropdownWidget<String>(
-  topContext: context,
   itemsList: ['Apple', 'Banana', 'Cherry'],
   onChange: (value) => print(value),
   headerBuilder: (context, selectedItem, enabled) => Text(selectedItem ?? 'Pick a fruit'),
@@ -45,7 +43,6 @@ CustomSearchDropdownWidget<String>(
 
 ```dart
 CustomMultiSearchDropdownWidget<User>(
-  topContext: context,
   itemsList: users,
   selectedItems: selectedUsers,
   onChanged: (values) => setState(() => selectedUsers = values),
@@ -58,4 +55,4 @@ CustomMultiSearchDropdownWidget<User>(
 
 ## Additional information
 
-For documentation and issues, please visit the [GitHub repository](https://github.com/Abdul/searable_dropdown).
+For documentation and issues, please visit the [GitHub repository](https://github.com/Abdul520Mannan/searchable_dropdown).

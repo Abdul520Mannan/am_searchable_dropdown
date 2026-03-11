@@ -1,9 +1,9 @@
 name: searable_dropdown
 description: A highly customizable searchable dropdown for Flutter, supporting single-select, multi-select with checkboxes, and radio-select. Supports local and server-side filtering.
 version: 1.0.0
-homepage: https://github.com/Abdul/searable_dropdown
-repository: https://github.com/Abdul/searable_dropdown
-issue_tracker: https://github.com/Abdul/searable_dropdown/issues
+homepage: https://github.com/Abdul520Mannan/searchable_dropdown
+repository: https://github.com/Abdul520Mannan/searchable_dropdown
+issue_tracker: https://github.com/Abdul520Mannan/searchable_dropdown/issues
 
 environment:
   sdk: ^3.10.3
