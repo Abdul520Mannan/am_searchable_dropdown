@@ -1,6 +1,7 @@
 ## 1.0.1
 
 *   Improved pub.dev score by adding comprehensive API documentation (dartdoc comments).
+*   Updated repository URLs to match the package name for better pub.dev verification.
 
 ## 1.0.0
 

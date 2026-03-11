@@ -57,6 +57,6 @@ CustomMultiSearchDropdownWidget<User>(
 ## Additional information
 
 - Source code and issue tracker:
-[https://github.com/Abdul520Mannan/searchable_dropdown](https://github.com/Abdul520Mannan/searchable_dropdown)
+[https://github.com/Abdul520Mannan/am_searchable_dropdown](https://github.com/Abdul520Mannan/am_searchable_dropdown)
 
 If you find a bug or want to request a feature, please open an issue on GitHub.
