@@ -6,7 +6,7 @@ repository: https://github.com/Abdul520Mannan/searchable_dropdown
 issue_tracker: https://github.com/Abdul520Mannan/searchable_dropdown/issues
 
 environment:
-  sdk: ^3.10.3
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
