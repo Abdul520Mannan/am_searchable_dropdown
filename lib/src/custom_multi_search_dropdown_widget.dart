@@ -19,7 +19,23 @@ class CustomMultiSearchDropdownWidget<T> extends StatefulWidget {
     this.isLoading = false,
     this.searchFieldDecoration,
     this.itemToString,
+    this.headerDecoration,
+    this.validator,
+    this.autovalidateMode = AutovalidateMode.disabled,
+    this.errorTextStyle,
+    this.errorBorder,
+    this.suffixIcon,
+    this.headerPadding,
   });
+
+  /// Optional decoration for the dropdown header.
+  final Decoration? headerDecoration;
+
+  /// Optional padding for the dropdown header.
+  final EdgeInsetsGeometry? headerPadding;
+
+  /// Optional custom icon for the dropdown header.
+  final Widget? suffixIcon;
 
   /// Optional function to convert an item to a string for filtering.
   /// If not provided, `item.toString()` is used.
@@ -52,6 +68,18 @@ class CustomMultiSearchDropdownWidget<T> extends StatefulWidget {
 
   /// Custom decoration for the search text field.
   final InputDecoration? searchFieldDecoration;
+
+  /// Form field validation logic.
+  final String? Function(List<T>? value)? validator;
+
+  /// Autovalidate mode for the form field.
+  final AutovalidateMode autovalidateMode;
+
+  /// Style for the validation error text.
+  final TextStyle? errorTextStyle;
+
+  /// Border to show when there is a validation error.
+  final BoxBorder? errorBorder;
 
   @override
   State<CustomMultiSearchDropdownWidget<T>> createState() => _CustomMultiSearchDropdownWidgetState<T>();
@@ -331,13 +359,68 @@ class _CustomMultiSearchDropdownWidgetState<T> extends State<CustomMultiSearchDr
 
   @override
   Widget build(BuildContext context) {
-    return CompositedTransformTarget(
-      link: layerLink,
-      child: InkWell(
-        key: buttonKey,
-        onTap: _toggleOverLay,
-        child: widget.headerBuilder(context, widget.selectedItems, true),
-      ),
+    return FormField<List<T>>(
+      initialValue: widget.selectedItems,
+      validator: widget.validator,
+      autovalidateMode: widget.autovalidateMode,
+      builder: (FormFieldState<List<T>> state) {
+        // Update the form field value when the widget's selectedItems changes
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (widget.selectedItems != state.value) {
+            state.didChange(widget.selectedItems);
+          }
+        });
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: CompositedTransformTarget(
+                link: layerLink,
+                child: Container(
+                  decoration: state.hasError
+                      ? (widget.errorBorder != null
+                          ? (widget.headerDecoration is BoxDecoration
+                              ? (widget.headerDecoration as BoxDecoration).copyWith(border: widget.errorBorder)
+                              : BoxDecoration(border: widget.errorBorder))
+                          : (widget.headerDecoration is BoxDecoration
+                              ? (widget.headerDecoration as BoxDecoration).copyWith(border: Border.all(color: Colors.red))
+                              : BoxDecoration(border: Border.all(color: Colors.red))))
+                      : widget.headerDecoration,
+                  child: InkWell(
+                    key: buttonKey,
+                    onTap: _toggleOverLay,
+                    child: Padding(
+                      padding: widget.headerPadding ?? const EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          Expanded(child: widget.headerBuilder(context, widget.selectedItems, true)),
+                          const SizedBox(width: 8),
+                          widget.suffixIcon ??
+                              const RotatedBox(
+                                quarterTurns: -45,
+                                child: Icon(Icons.chevron_left, color: Color(0xFF757575), size: 20),
+                              ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            if (state.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 5, left: 12),
+                child: Text(
+                  state.errorText ?? "",
+                  style: widget.errorTextStyle ?? const TextStyle(color: Colors.red, fontSize: 12),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 
