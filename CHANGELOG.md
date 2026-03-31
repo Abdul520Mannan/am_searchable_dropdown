@@ -1,3 +1,11 @@
+## 1.0.2
+
+*   **Form Validation Support**: Wrapped dropdown headers in `FormField` to support `validator` and `autovalidateMode`.
+*   **New Styling Properties**: Added `headerDecoration`, `headerPadding`, `suffixIcon`, `errorTextStyle`, and `errorBorder`.
+*   **State Synchronization**: Implemented post-frame callback to keep `FormField` value in sync with selected items.
+*   **Visual Feedback**: Added support for showing validation error text and applying error borders when validation fails.
+*   **Documentation Upgrade**: Comprehensive `README.md` update with advanced usage examples and feature breakdown.
+
 ## 1.0.1
 
 *   Improved pub.dev score by adding comprehensive API documentation (dartdoc comments).
