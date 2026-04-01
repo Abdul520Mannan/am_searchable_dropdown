@@ -1,3 +1,10 @@
+## 1.0.3
+
+*   **Enabled / Disabled State**: Added `isEnabled` property to toggle user interaction with the dropdown.
+*   **Disabled UI Customization**: Introduced `disabledHeaderDecoration` to style the dropdown when it's deactivated.
+*   **Default Disabled Style**: Added a sensible default light grey background for the disabled state.
+*   **Visual Enhancements**: Opacity for suffix icon automatically adjusts when dropdown is disabled.
+
 ## 1.0.2
 
 *   **Form Validation Support**: Wrapped dropdown headers in `FormField` to support `validator` and `autovalidateMode`.

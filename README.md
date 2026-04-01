@@ -24,7 +24,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  am_searchable_dropdown: ^1.0.2
+  am_searchable_dropdown: ^1.0.3
 ```
 
 Then run:
@@ -139,6 +139,22 @@ errorBorder: Border.all(color: Colors.red, width: 2),
 
 ### 6. Multi Select with Checkboxes
 `CustomMultiSearchDropdownWidget` provides a familiar multi-select interface with checkboxes integrated into the logic.
+
+### 7. Enabling / Disabling Dropdown
+Control interaction using `isEnabled`. You can also style the disabled state using `disabledHeaderDecoration`.
+
+```dart
+CustomSearchDropdownWidget<String>(
+  isEnabled: false, // Disables the dropdown
+  disabledHeaderDecoration: BoxDecoration(
+    color: Colors.grey[200],
+    borderRadius: BorderRadius.circular(8),
+  ),
+  // ... other parameters
+)
+```
+
+By default, as sensible light grey decoration is applied when disabled, and the suffix icon's opacity is reduced to 0.5.
 
 ---
 
